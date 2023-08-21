@@ -1,4 +1,6 @@
-.loader {
+import styled from 'styled-components';
+
+export const Loader = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -11,4 +13,4 @@
   z-index: 1200;
   display: flex;
   justify-content: center;
-}
+`;

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../ImageGallery/ImageGallery.module.css';
 import PropTypes from 'prop-types';
+import { GalleryItem, ListItemImage } from './ImageGalleyItem.styled';
 
 export default function ImageGalleryItem({
   tags,
@@ -9,14 +9,13 @@ export default function ImageGalleryItem({
   onClickImage,
 }) {
   return (
-    <li className={styles.imageGalleryItem}>
-      <img
+    <ListItemImage>
+      <GalleryItem
         onClick={() => onClickImage(largeimg)}
         src={src}
         alt={tags}
-        className={styles.galleryItem}
       />
-    </li>
+    </ListItemImage>
   );
 }
 

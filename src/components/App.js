@@ -7,7 +7,7 @@ import LoaderSpinner from './Loader/Loader';
 import Button from './Button/Button';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './App.module.css';
+import { AppStyle, ErrorStyle } from './App.styled';
 
 class App extends Component {
   state = {
@@ -61,15 +61,6 @@ class App extends Component {
     this.setState({ searchInput, page: 1, error: null });
   };
 
-  scroll = () => {
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    }, 1000);
-  };
-
   modalWindowOpen = largeimg => {
     this.setState(() => ({
       largeimg: largeimg,
@@ -85,7 +76,7 @@ class App extends Component {
   render() {
     const { images, error, largeimg, isLoading, page } = this.state;
     return (
-      <div className={styles.App}>
+      <AppStyle>
         <Searchbar onSubmit={this.onSearch} />
         {isLoading && <LoaderSpinner />}
         {images.length > 0 && !error && (
@@ -95,9 +86,9 @@ class App extends Component {
         {largeimg && (
           <ModalWindow onClose={this.modalWindowClose} src={largeimg} />
         )}
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <ErrorStyle>{error}</ErrorStyle>}
         <ToastContainer autoClose={2000} />
-      </div>
+      </AppStyle>
     );
   }
 }

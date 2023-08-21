@@ -1,8 +1,13 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './Searchbar.module.css';
 import PropTypes from 'prop-types';
+import {
+  SearchFormButton,
+  SearchFormInput,
+  SearchbarForm,
+  SearchbarHeader,
+} from './Searchbar.styled';
 
 export default class Searchbar extends Component {
   static propTypes = {
@@ -25,13 +30,10 @@ export default class Searchbar extends Component {
   };
   render() {
     return (
-      <header className={styles.searchbar}>
-        <form onSubmit={this.handlerSubmit} className={styles.searchForm}>
-          <button type="submit" className={styles.searchButton}>
-            <span className={styles.searchButtonLabel}>Search</span>
-          </button>
-          <input
-            className={styles.searchFormInput}
+      <SearchbarHeader>
+        <SearchbarForm onSubmit={this.handlerSubmit}>
+          <SearchFormButton type="submit">Search</SearchFormButton>
+          <SearchFormInput
             type="text"
             autoComplete="off"
             autoFocus
@@ -39,8 +41,8 @@ export default class Searchbar extends Component {
             value={this.state.searchInput}
             onChange={this.handlerChange}
           />
-        </form>
-      </header>
+        </SearchbarForm>
+      </SearchbarHeader>
     );
   }
 }

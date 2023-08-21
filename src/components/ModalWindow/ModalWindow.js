@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from '../ModalWindow/ModalWindow.module.css';
 import PropTypes from 'prop-types';
+import { Backdrop, ModalImg, ModalOpen } from './ModalWindow.styled';
 
 const body = document.querySelector('body');
 
@@ -34,11 +34,11 @@ export default class ModalWindow extends Component {
   render() {
     const { src, alt } = this.props;
     return (
-      <div className={styles.backdrop} onClick={this.backDropClick}>
-        <div className={styles.modalOpen}>
-          <img className={styles.modalImg} src={src} alt={alt} />
-        </div>
-      </div>
+      <Backdrop onClick={this.backDropClick}>
+        <ModalOpen>
+          <ModalImg src={src} alt={alt} />
+        </ModalOpen>
+      </Backdrop>
     );
   }
 }

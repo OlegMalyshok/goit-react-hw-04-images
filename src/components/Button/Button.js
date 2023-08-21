@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../Button/Button.module.css';
+import { ButtonLoad } from './Button.styled';
 
 export default function Button({ loadImages }) {
   return (
-    <button type="button" className={styles.button} onClick={loadImages}>
+    <ButtonLoad type="button" onClick={loadImages}>
       Load more...
-    </button>
+    </ButtonLoad>
   );
 }
 

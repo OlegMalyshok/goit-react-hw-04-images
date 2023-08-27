@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
@@ -8,41 +7,43 @@ import {
   SearchbarForm,
   SearchbarHeader,
 } from './Searchbar.styled';
+import { useState } from 'react';
 
-export default class Searchbar extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func,
-  };
+export const Searchbar = ({ onSubmit }) => {
+  const [searchInput, searchInputSetState] = useState('');
 
-  state = {
-    searchInput: '',
-  };
-  handlerSubmit = event => {
+  const handlerSubmit = event => {
     event.preventDefault();
-    if (this.state.searchInput.trim() === '') {
+    if (searchInput.trim() === '') {
       return toast.error('Please enter request');
     }
-    this.props.onSubmit(this.state.searchInput);
-    this.setState({ searchInput: '' });
+    onSubmit(searchInput);
+    searchInputSetState('');
   };
-  handlerChange = event => {
-    this.setState({ searchInput: event.currentTarget.value.toLowerCase() });
+
+  const handlerChange = event => {
+    searchInputSetState(event.currentTarget.value.toLowerCase());
   };
-  render() {
-    return (
-      <SearchbarHeader>
-        <SearchbarForm onSubmit={this.handlerSubmit}>
-          <SearchFormButton type="submit">Search</SearchFormButton>
-          <SearchFormInput
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.searchInput}
-            onChange={this.handlerChange}
-          />
-        </SearchbarForm>
-      </SearchbarHeader>
-    );
-  }
-}
+
+  return (
+    <SearchbarHeader>
+      <SearchbarForm onSubmit={handlerSubmit}>
+        <SearchFormButton type="submit">Search</SearchFormButton>
+        <SearchFormInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={searchInput}
+          onChange={handlerChange}
+        />
+      </SearchbarForm>
+    </SearchbarHeader>
+  );
+};
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+};
+
+export default Searchbar;
